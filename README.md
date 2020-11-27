@@ -1,1 +1,1 @@
-#Juego piedra, papel tijera, lagarto o spock
+Juego piedra, papel tijera, lagarto o spock
