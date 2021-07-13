@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import Dado from './componentes/Dado.jsx';
+const dado = 1;
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const defaultDados = [
+  dado, dado, dado, dado, dado
+  ];
+
+const App = () => {
+
+  const [dados, setDados] = useState(defaultDados);
+
+  function numerosAleatorios(min, max) {
+   return Math.round(Math.random() * (max - min) + min);
+  }
+
+  const handleTirar = () => {
+    dados.map( d =>
+     d = numerosAleatorios(1,6));
+  };
+  
+  return(
+    <div>
+      <div> {dados.map(d => <input type="button" value = {d}></input> )}</div>
+      <button onClick={handleTirar}>Tirar</button>
     </div>
   );
 }
