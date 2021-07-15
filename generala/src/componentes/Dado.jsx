@@ -1,17 +1,32 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-const Dado = ({valor}) => {
-	const[valorDado, setValorDado] = useState(numerosAleatorios(1,6));
+const Dado = ({ds}) => {
 
-	function numerosAleatorios(min, max) {
-   return Math.round(Math.random() * (max - min) + min);
-  }
+	const [valorDado, setValorDado] = useState({
+		valor:"",
+		select: "",
+	});
 
+	console.log(ds);
+
+  	useEffect(() => {
+	  setValorDado({valor: ds,
+		           select: false})
+  	});
+
+	const onChange = (event) => {
+		setValorDado(valorDado.valor = event.target.value);
+  	};
+
+	const onChangeSelect = (event) => {
+		setValorDado(valorDado.select = event.target.value);
+	}
 
 
 	return (
-		<div>
-			<input type="button" value ={valorDado}></input>
+		<div> 
+			<input type="button" value={valorDado.valor} onChange={onChange} ></input>
+			<input type="checkbox" value={true} onChange={onChangeSelect}/>
 		</div>
 	)
 
