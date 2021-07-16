@@ -1,32 +1,30 @@
 import React, {useEffect, useState} from 'react';
 
-const Dado = ({ds}) => {
+const Dado = ({ds, esSeleccionado}) => {
 
-	const [valorDado, setValorDado] = useState({
+	const [dado, setDado] = useState({
+		id:"",
 		valor:"",
 		select: "",
 	});
 
-	console.log(ds);
-
   	useEffect(() => {
-	  setValorDado({valor: ds,
-		           select: false})
-  	});
+		console.log(ds)
+	  setDado(ds)
+  	},[ds]
+	);
 
 	const onChange = (event) => {
-		setValorDado(valorDado.valor = event.target.value);
+		setDado((prevState => ({...prevState, 
+			[event.target.valor] : event.target.value,})))
   	};
 
-	const onChangeSelect = (event) => {
-		setValorDado(valorDado.select = event.target.value);
-	}
-
+	console.log(dado);
 
 	return (
 		<div> 
-			<input type="button" value={valorDado.valor} onChange={onChange} ></input>
-			<input type="checkbox" value={true} onChange={onChangeSelect}/>
+			<input type="button" value={dado.valor} onChange={onChange}/>
+			<input type="checkbox" value={dado.valor} onChange={esSeleccionado(dado.id)}/>
 		</div>
 	)
 

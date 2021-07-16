@@ -1,13 +1,13 @@
 import React from 'react';
 import Dado from './Dado.jsx';
 
-const Dados = ({dados}) => {
-	console.log(dados)
+const Dados = ({dados, esSeleccionado}) => {
+	console.log(dados);
 	
 	return (
 			<div>
 			 {dados.map(d => 
-			 	<Dado ds={d}/> 
+			 	<Dado ds={d} esSeleccionado = {esSeleccionado(d.id)} /> 
 			 )}
 			</div>
 		
