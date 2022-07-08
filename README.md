@@ -1,1 +1,1 @@
-Juego Generala
+Juego Piedra Papel Tijera
