@@ -5,7 +5,7 @@ const Rules = () => {
   
   return(
         <div>
-			<p>Rules</p>    
+			    <p>Rules</p>    
         </div>
       );
 };
