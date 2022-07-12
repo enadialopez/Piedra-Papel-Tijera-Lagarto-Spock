@@ -1,78 +1,132 @@
- import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
+import Rock from '../images/rock.jpg'
+import Paper from '../images/paper.png'
+import Scissor from '../images/scissor.jpg'
+import Lizard from '../images/lizard.jpg'
+import Spock from '../images/spock.jpg'
+
 
 const Game = () => {
 
   const [player, setPlayerState] = useState({})
+  const [pointPlayer, setPointPlayer] = useState(0) ;
   const [bot, setBotState] = useState({})
+  const [result, setResultState] = useState("")
+  const [pointBot, setPointBot] = useState(0) ;
 
 
-  const opciones = [
+  const opciones =  [
     {
-      eleccion: "rock",
-      derrota: ["scissors", "lizard"],
+      element: "rock",
+      img: Rock,
     },
     {
-      eleccion: "paper",
-      derrota: ["rock", "spock"],
+      element: "paper",
+      img: Paper,
     },
     {
-      eleccion: "scissors",
-      derrota: ["paper", "lizard"],
+      element: "scissor",
+      img: Scissor,
     },
     {
-      eleccion: "spock",
-      derrota: ["scissors", "rock"],
+      element: "spock",
+      img: Spock,
     },
     {
-      eleccion: "lizard",
-      derrota: ["spock", "paper"],
+      element: "lizard",
+      img: Lizard
     },
   ];
 
-  const choiseOption = (event) => {
-    const payer = opciones.find(e => e.eleccion === event.target.textContent);
-    setPlayerState(player)
+  const choiseOption = (element) => {
+    setPlayerState(element)
     choiseBotPlayer();
+    finalScore(player, bot);
   };
 
   const choiseBotPlayer = () => {
     const choise = opciones[Math.floor(Math.random() * opciones.length)];
-
     setBotState(choise);
   };
 
-  const finalScore = () => {
-    let finalS;
-    if (player.derrota.contain(bot.eleccion) && player.eleccion){
-      finalS = "Winner : Player";
-    } else if (bot.derrota.contain(player.eleccion) && player.eleccion){
-      finalS = "Winner : Bot";
-    } else if (player.eleccion === player.eleccion && player.eleccion){
-      finalS = "Winner : Draw";
+  const finalScore = (player, bot) => {
+    if(( player.element === "rock") && ((bot.element === "scissor") || (bot.element === "lizard"))){
+      setResultState ("Winner : Player")
+      setPointPlayer(pointPlayer + 1)
     }
-    return <h1>{finalS}</h1>
-
+    if (player.element === bot.element){
+      setResultState ("Draw")
+    }
+    if(( player.element === "rock") && ((bot.element ==="paper") || (bot.element === "spock"))){
+      setPointBot(pointBot + 1);
+      setResultState("Winner : Bot");
+    }
+    if((player.element === "paper") && ((bot.element === "rock") || (bot.element === "spock"))){
+      setPointPlayer(pointPlayer + 1)
+      setResultState ("Winner : Player")
+    } 
+    if((player.element === "paper") && ((bot.element === "scissor") || (bot.element === "lizard"))){
+      setPointBot(pointBot + 1);
+      setResultState("Winner : Bot");
+    }
+    if((player.element === "scissor") && ((bot.element === "Papel") || (bot.element === "lizard"))){
+      setPointPlayer(pointPlayer + 1)
+      setResultState ("Winner : Player")
+    }
+    if((player.element === "scissor") && ((bot.element === "Piedra") || (bot.element === "Spock"))){
+      setPointBot(pointBot + 1);
+      setResultState("Winner : Bot");
+    }
+    if((player.element === "lizard") && ((bot.element === "Papel") || (bot.element === "Spock"))){
+      setPointPlayer(pointPlayer + 1)
+      setResultState ("Winner : Player")
+    }
+    if((player.element === "lizard") && ((bot.element === "scissor") || (bot.element === "Piedra"))){
+      setPointBot(pointBot + 1);
+      setResultState("Winner : Bot");
+    }
+    if((player.element === "Spock") && ((bot.element === "scissor") || (bot.element === "Piedra"))){
+      setPointPlayer(pointPlayer + 1)
+      setResultState ("Winner : Player")
+    }
+    if((player.element === "Spock") && ((bot.element === "Lagarto") || (bot.element === "Papel"))){
+      setPointBot(pointBot + 1);
+      setResultState("Winner : Bot");
+    }
   }
+
+  const reset = () => {
+    setPlayerState({});
+    setBotState({});
+    setResultState("");
+    setPointBot(0);
+    setPointPlayer(0);
+}
 
   return(
           <>
-            <p>Game</p>
-            <h1>{finalScore} </h1>
-            <main>
-            <section>
-            <div className="jugador">Payer</div>
-            <div className="eleccion">{player.eleccion}</div>
-            </section>
-            <section>
-            <div className="maquina">Bot</div>
-            <div className="eleccion">{bot.eleccion}</div>
-            </section>
-            <div className="opciones">
-              {opciones.map((e) => (
-                <button  onClick={choiseOption}>{e.eleccion} </button>
-              ))}
-            </div>
-            </main>
+            <p>Game</p>            
+                <div className="jugador">Payer</div>
+                <div>Choise player :{player.element}</div>
+                <p>Point player : {pointPlayer}</p>
+             
+                <div className="maquina">Bot</div>
+                <div className="eleccion">Choise player: {bot.element}</div>
+                <p>Point bot : {pointBot}</p>
+             
+              <div className="opciones">
+                 {opciones.map((select, index) => (
+                  <button className="botonPapel" onClick={()=>choiseOption(select)}>
+                    <img key ={index} src={select.img} className="img"/>
+                  </button>  
+                ))}
+              </div>
+            
+            <div className="jugador1 col-md-2 col-2">
+                        <p>¿ Quieres empezar de 0 ?</p>
+                        <button className="btn btn-info" onClick={() => {reset()}}>Volver a empezar</button> 
+                               
+                    </div>
           </>   
       );
 };
