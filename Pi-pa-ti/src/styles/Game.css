@@ -20,8 +20,8 @@ h1{
     width: 30%;
     height: 250px;
     margin: 20px;
-    box-shadow: 0 0 40px #fff;
-    border-radius: 15px;
+    box-shadow: 0 0 20px #fff;
+    border-radius: 5px;
     background: rgba(255, 255, 255, 0,1);
     overflow: hidden;
     justify-content:space-between;
@@ -30,7 +30,6 @@ h1{
     border-left: 1px solid rgba(255, 255, 255, 0,5S);
     backdrop-filter: blur(5px);
     padding: 10px;
-    flex-wrap: wrap;
 }
 
 .jugador2{
@@ -39,8 +38,8 @@ h1{
     width: 30%;
     height: 250px;
     margin: 20px;
-    box-shadow: 0 0 40px #fff;
-    border-radius: 15px;
+    box-shadow: 0 0 20px #fff;
+    border-radius: 5px;
     background: rgba(255, 255, 255, 0,1);
     overflow: hidden;
     justify-content: space-between;
@@ -49,15 +48,6 @@ h1{
     border-left: 1px solid rgba(255, 255, 255, 0,5S);
     backdrop-filter: blur(5px);
     padding: 10px;
-    flex-wrap: wrap;
-
-}
-
-.data-jugador1{
-    display: row;
-    justify-content:flex-start;
-    align-items:flex-start;
-    flex-wrap: wrap;
 }
 
 p{
@@ -93,16 +83,15 @@ p{
     display: flex;
     background: transparent;
     border-radius: 50%;
-    box-shadow: 0 0 40px #fff;
+    box-shadow: 0 0 25px #fff;
     flex-wrap: wrap;
-
 }
 
 .img-jugador1{
     display: flex;
     background: transparent;
     border-radius: 50%;
-    box-shadow: 0 0 40px #fff;
+    box-shadow: 0 0 20px #fff;
     margin-top: 40px;
     flex-wrap: wrap;  
 }
@@ -120,6 +109,69 @@ p{
     margin-top: 40px;
 }
 
-.btn{
-    display: flex;
+
+.button-85 {
+  padding: 0.6em 2em;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  left: 150px;
+}
+
+.button-85:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    
+    #00ffd5,
+    #002bff,
+    #f54781,
+    #16b4e4,
+    #052a4d,
+    #ff00c8
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-85 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.button-85:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgb(168, 65, 160);
+  left: 0;
+  top: 0;
+  border-radius: 10px;
 }

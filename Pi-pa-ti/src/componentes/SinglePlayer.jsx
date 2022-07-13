@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Rock from '../images/indicep.jpg'
 import Paper from '../images/paper.png'
 import Scissor from '../images/scissor.jpg'
@@ -6,16 +6,15 @@ import Lizard from '../images/lizard.jpg'
 import Spock from '../images/spock.jpg'
 import '../styles/Game.css';
 
-
-
-const Game = () => {
+const SinglePlayer = () => {
 
   const [player, setPlayerState] = useState({})
   const [pointPlayer, setPointPlayer] = useState(0) ;
   const [bot, setBotState] = useState({})
-  const [result, setResultState] = useState("")
-  const [pointBot, setPointBot] = useState(0) ;
-
+  const [result, setResultState] = useState("Good luck!")
+  const [pointBot, setPointBot] = useState(0);
+  const [gamePlayerCounter, setGamePlayerCounter] = useState(0);
+  const [gameBotCounter, setGameBotCounter] = useState(0);
 
   const opciones =  [
     {
@@ -41,9 +40,9 @@ const Game = () => {
   ];
 
   const choiseOption = (element) => {
-    setPlayerState(element)
+    setPlayerState(element);
     choiseBotPlayer();
-    finalScore(player, bot);
+    win();
   };
 
   const choiseBotPlayer = () => {
@@ -51,64 +50,91 @@ const Game = () => {
     setBotState(choise);
   };
 
+  const winPlayer = () => {
+    setResultState ("Winner : Player")
+    setPointPlayer(pointPlayer + 1)
+  }
+
+  const winBot = () => {
+    setPointBot(pointBot + 1);
+    setResultState("Winner : Bot");
+  }
+
   const finalScore = (player, bot) => {
     if(( player.element === "rock") && ((bot.element === "scissor") || (bot.element === "lizard"))){
-      setResultState ("Winner : Player")
-      setPointPlayer(pointPlayer + 1)
+      winPlayer()
     }
-    if (player.element === bot.element){
+    if (player.element === bot.element && player.element != null  && bot.element != null ){
       setResultState ("Draw")
     }
     if(( player.element === "rock") && ((bot.element ==="paper") || (bot.element === "spock"))){
-      setPointBot(pointBot + 1);
-      setResultState("Winner : Bot");
+      winBot()
     }
     if((player.element === "paper") && ((bot.element === "rock") || (bot.element === "spock"))){
-      setPointPlayer(pointPlayer + 1)
-      setResultState ("Winner : Player")
+      winPlayer()
     } 
     if((player.element === "paper") && ((bot.element === "scissor") || (bot.element === "lizard"))){
-      setPointBot(pointBot + 1);
-      setResultState("Winner : Bot");
+      winBot()
     }
     if((player.element === "scissor") && ((bot.element === "paper") || (bot.element === "lizard"))){
-      setPointPlayer(pointPlayer + 1)
-      setResultState ("Winner : Player")
+      winPlayer()
     }
     if((player.element === "scissor") && ((bot.element === "rock") || (bot.element === "spock"))){
-      setPointBot(pointBot + 1);
-      setResultState("Winner : Bot");
+      winBot()
     }
     if((player.element === "lizard") && ((bot.element === "paper") || (bot.element === "spock"))){
-      setPointPlayer(pointPlayer + 1)
-      setResultState ("Winner : Player")
+      winPlayer()
     }
     if((player.element === "lizard") && ((bot.element === "scissor") || (bot.element === "rock"))){
-      setPointBot(pointBot + 1);
-      setResultState("Winner : Bot");
+      winBot()
     }
     if((player.element === "spock") && ((bot.element === "scissor") || (bot.element === "rock"))){
-      setPointPlayer(pointPlayer + 1)
-      setResultState ("Winner : Player")
+      winPlayer()
     }
     if((player.element === "spock") && ((bot.element === "lizard") || (bot.element === "paper"))){
-      setPointBot(pointBot + 1);
-      setResultState("Winner : Bot");
+      winBot()
     }
   }
 
-  const reset = () => {
+  useEffect(() => {
+    if(player != null && bot != null){
+      finalScore(player, bot)
+      resetGame()
+    }
+  }, [player, bot])
+
+  const resetAllGame = () => {
     setPlayerState({});
     setBotState({});
-    setResultState("");
+    setResultState("Good luck!");
     setPointBot(0);
     setPointPlayer(0);
+    setGameBotCounter(0);
+    setGamePlayerCounter(0);
+}
+
+const resetGame = () => {
+    if (pointBot === 3){
+      setGameBotCounter( gameBotCounter + 1);
+      setResultState("You lost the game!");
+      setPointBot(0);
+      setPointPlayer(0);
+      setPlayerState({});
+      setBotState({});
+    }
+    if (pointPlayer === 3){
+      setGamePlayerCounter( gamePlayerCounter + 1);
+      setResultState("You won the game!");
+      setPointBot(0);
+      setPointPlayer(0);
+      setPlayerState({});
+      setBotState({});
+    }
 }
 
   return(
           <>
             <h1>Rock, Paper, Scissor, Spock, Lizard</h1>
-
             <div className="opciones">
                  {opciones.map((select, index) => (
                   <button className="boton" onClick={()=>choiseOption(select)}>
@@ -120,31 +146,35 @@ const Game = () => {
                 <div className='jugador1'>
                   <div className='data-jugador1'>
                     <h1>Player</h1>
-                    <p>Choise :{player.element}</p>
-                    <p>Score player : {pointPlayer}</p>
+                    <p>Choise : {player.element}</p>
+                    <p>Score : {pointPlayer}</p>
+                    <p>Game : {gamePlayerCounter}</p>
                   </div>
                   <div className='img-jugador'>
                     <img src={player.img} className="img-jugador1"/>
                   </div>
                 </div>
                 <div className='center'>
-                  <h1>{result}</h1>
+                  <div>
+                    <h1>{result}</h1>
+                  </div> 
                   <p>Do you want to start again ?</p>
-                  <button className="btn-reset" onClick={() => {reset()}}>reset</button> 
+                  <button className="button-85" role="button" onClick={() => {resetAllGame()}}>reset</button> 
                 </div>
                 <div className='jugador2'>
                   <div className='data-jugador2'>
                     <h1>Bot</h1>
                     <p>Choise : {bot.element}</p>
-                    <p>Score bot : {pointBot}</p>
+                    <p>Score : {pointBot}</p>
+                    <p>Game : {gameBotCounter}</p>
                   </div>
                   <div className='img-jugador'>
                     <img src={bot.img} className="img-jugador2"/>
                   </div>
                 </div>
-              </div>
+              </div> 
           </>   
       );
 };
 
-export default Game;
+export default SinglePlayer;
