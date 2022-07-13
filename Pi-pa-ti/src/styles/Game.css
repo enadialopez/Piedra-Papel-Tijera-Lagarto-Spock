@@ -1,0 +1,125 @@
+h1{
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    text-shadow: 7px 7px 5px #000;
+    font-family:'Permanent Marker', cursive;
+}
+
+.jugada {
+    display: flex;
+    justify-content:space-evenly;
+    padding: 10px;
+    flex-wrap: wrap;
+  }
+
+.jugador1{
+    display: flex;
+    flex-direction: row;
+    content: '';
+    width: 30%;
+    height: 250px;
+    margin: 20px;
+    box-shadow: 0 0 40px #fff;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0,1);
+    overflow: hidden;
+    justify-content:space-between;
+    align-items:flex-start;
+    border-top: 1px solid rgba(255, 255, 255, 0,5S);
+    border-left: 1px solid rgba(255, 255, 255, 0,5S);
+    backdrop-filter: blur(5px);
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+.jugador2{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 30%;
+    height: 250px;
+    margin: 20px;
+    box-shadow: 0 0 40px #fff;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0,1);
+    overflow: hidden;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-top: 1px solid rgba(255, 255, 255, 0,5S);
+    border-left: 1px solid rgba(255, 255, 255, 0,5S);
+    backdrop-filter: blur(5px);
+    padding: 10px;
+    flex-wrap: wrap;
+
+}
+
+.data-jugador1{
+    display: row;
+    justify-content:flex-start;
+    align-items:flex-start;
+    flex-wrap: wrap;
+}
+
+p{
+    color: rgb(233, 196, 202);
+    text-shadow:7px 7px 5px #000;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 25px;
+}
+
+
+.opciones {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.again {
+    display: row;
+    justify-content: flex-end;
+    align-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.boton {
+    border-radius: 50%;
+    background: none;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.img {
+    display: flex;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 0 0 40px #fff;
+    flex-wrap: wrap;
+
+}
+
+.img-jugador1{
+    display: flex;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 0 0 40px #fff;
+    margin-top: 40px;
+    flex-wrap: wrap;  
+}
+
+.center{
+    display: row;
+    flex-wrap: wrap;
+    padding-top: 50px;
+}
+
+.img-jugador2{
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 0 0 40px #fff;
+    margin-top: 40px;
+}
+
+.btn{
+    display: flex;
+}

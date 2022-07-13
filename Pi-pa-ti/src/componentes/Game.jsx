@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import Rock from '../images/rock.jpg'
+import Rock from '../images/indicep.jpg'
 import Paper from '../images/paper.png'
 import Scissor from '../images/scissor.jpg'
 import Lizard from '../images/lizard.jpg'
 import Spock from '../images/spock.jpg'
+import '../styles/Game.css';
+
 
 
 const Game = () => {
@@ -69,27 +71,27 @@ const Game = () => {
       setPointBot(pointBot + 1);
       setResultState("Winner : Bot");
     }
-    if((player.element === "scissor") && ((bot.element === "Papel") || (bot.element === "lizard"))){
+    if((player.element === "scissor") && ((bot.element === "paper") || (bot.element === "lizard"))){
       setPointPlayer(pointPlayer + 1)
       setResultState ("Winner : Player")
     }
-    if((player.element === "scissor") && ((bot.element === "Piedra") || (bot.element === "Spock"))){
+    if((player.element === "scissor") && ((bot.element === "rock") || (bot.element === "spock"))){
       setPointBot(pointBot + 1);
       setResultState("Winner : Bot");
     }
-    if((player.element === "lizard") && ((bot.element === "Papel") || (bot.element === "Spock"))){
+    if((player.element === "lizard") && ((bot.element === "paper") || (bot.element === "spock"))){
       setPointPlayer(pointPlayer + 1)
       setResultState ("Winner : Player")
     }
-    if((player.element === "lizard") && ((bot.element === "scissor") || (bot.element === "Piedra"))){
+    if((player.element === "lizard") && ((bot.element === "scissor") || (bot.element === "rock"))){
       setPointBot(pointBot + 1);
       setResultState("Winner : Bot");
     }
-    if((player.element === "Spock") && ((bot.element === "scissor") || (bot.element === "Piedra"))){
+    if((player.element === "spock") && ((bot.element === "scissor") || (bot.element === "rock"))){
       setPointPlayer(pointPlayer + 1)
       setResultState ("Winner : Player")
     }
-    if((player.element === "Spock") && ((bot.element === "Lagarto") || (bot.element === "Papel"))){
+    if((player.element === "spock") && ((bot.element === "lizard") || (bot.element === "paper"))){
       setPointBot(pointBot + 1);
       setResultState("Winner : Bot");
     }
@@ -105,28 +107,42 @@ const Game = () => {
 
   return(
           <>
-            <p>Game</p>            
-                <div className="jugador">Payer</div>
-                <div>Choise player :{player.element}</div>
-                <p>Point player : {pointPlayer}</p>
-             
-                <div className="maquina">Bot</div>
-                <div className="eleccion">Choise player: {bot.element}</div>
-                <p>Point bot : {pointBot}</p>
-             
-              <div className="opciones">
+            <h1>Rock, Paper, Scissor, Spock, Lizard</h1>
+
+            <div className="opciones">
                  {opciones.map((select, index) => (
-                  <button className="botonPapel" onClick={()=>choiseOption(select)}>
+                  <button className="boton" onClick={()=>choiseOption(select)}>
                     <img key ={index} src={select.img} className="img"/>
                   </button>  
                 ))}
               </div>
-            
-            <div className="jugador1 col-md-2 col-2">
-                        <p>¿ Quieres empezar de 0 ?</p>
-                        <button className="btn btn-info" onClick={() => {reset()}}>Volver a empezar</button> 
-                               
-                    </div>
+              <div className="jugada">            
+                <div className='jugador1'>
+                  <div className='data-jugador1'>
+                    <h1>Player</h1>
+                    <p>Choise :{player.element}</p>
+                    <p>Score player : {pointPlayer}</p>
+                  </div>
+                  <div className='img-jugador'>
+                    <img src={player.img} className="img-jugador1"/>
+                  </div>
+                </div>
+                <div className='center'>
+                  <h1>{result}</h1>
+                  <p>Do you want to start again ?</p>
+                  <button className="btn-reset" onClick={() => {reset()}}>reset</button> 
+                </div>
+                <div className='jugador2'>
+                  <div className='data-jugador2'>
+                    <h1>Bot</h1>
+                    <p>Choise : {bot.element}</p>
+                    <p>Score bot : {pointBot}</p>
+                  </div>
+                  <div className='img-jugador'>
+                    <img src={bot.img} className="img-jugador2"/>
+                  </div>
+                </div>
+              </div>
           </>   
       );
 };
