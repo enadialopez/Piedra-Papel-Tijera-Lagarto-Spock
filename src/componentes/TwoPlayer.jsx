@@ -152,7 +152,7 @@ const showGame = () => {
                 </div>
                 <div className='center'>
                     <p>Do you want to start again ?</p>
-                    <button className="button-85" role="button" onClick={() => {resetAllGame()}}>Reset</button>
+                    <button className="button-85" role="button" onClick={() => {resetAllGame()}}>Reset</button><br/>
                     <button onClick={goBack} className="button-85"> Back</button> 
                 </div>
                 <div className='jugador2'>
