@@ -46,7 +46,6 @@ const SinglePlayer = () => {
   const choiseOption = (element) => {
     setPlayerState(element);
     choiseBotPlayer();
-    win();
   };
 
   const choiseBotPlayer = () => {
