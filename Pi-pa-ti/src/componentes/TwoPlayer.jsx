@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import Rock from '../images/indicep.jpg';
 import Paper from '../images/paper.png';
 import Scissor from '../images/scissor.jpg';
@@ -16,6 +17,11 @@ const TwoPlayer1 = () => {
   const [gamePlayer1Counter, setGamePlayer1Counter] = useState(0);
   const [gameplayer2Counter, setGameplayer2Counter] = useState(0);
   const [choise, setChoiseState] = useState(true);
+  
+  const navigate = useNavigate();
+  const goBack = () => navigate('/');
+
+
   const opciones =  [
     {
       element: "rock",
@@ -139,25 +145,24 @@ const showGame = () => {
                     <div className='data-jugador1'>
                         <h1>Player 1</h1>
                         <p>Choise : </p>
-                        <p>Score : </p>
-                        <p>Game : </p>
+                        <p>Score : {pointPlayer1}</p>
+                        <p>Game : {gamePlayer1Counter} </p>
                     </div>
                     
                 </div>
                 <div className='center'>
                     <p>Do you want to start again ?</p>
-                    <button className="button-85" role="button" onClick={() => {resetAllGame()}}>reset</button> 
+                    <button className="button-85" role="button" onClick={() => {resetAllGame()}}>Reset</button>
+                    <button onClick={goBack} className="button-85"> Back</button> 
                 </div>
                 <div className='jugador2'>
                     <div className='data-jugador2'>
                         <h1>player 2</h1>
                         <p>Choise : </p>
-                        <p>Score : </p>
-                        <p>Game : </p>
+                        <p>Score : {pointplayer2} </p>
+                        <p>Game : {gameplayer2Counter} </p>
                     </div>
-                    <div className='img-jugador'>
-                        <img src={player2.img} className="img-jugador2"/>
-                    </div>
+                    
                 </div>
             </div>
         )
@@ -180,7 +185,8 @@ const showGame = () => {
                         <h1>{result}</h1>
                     </div> 
                     <p>Do you want to start again ?</p>
-                    <button className="button-85" role="button" onClick={() => {resetAllGame()}}>reset</button> 
+                    <button className="button-85" role="button" onClick={() => {resetAllGame()}}>reset</button> <br/> 
+                    <button onClick={goBack} className="button-85"> Back</button>
                 </div>
                 <div className='jugador2'>
                     <div className='data-jugador2'>

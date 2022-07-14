@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import Rock from '../images/indicep.jpg'
 import Paper from '../images/paper.png'
 import Scissor from '../images/scissor.jpg'
@@ -16,6 +17,9 @@ const SinglePlayer = () => {
   const [gamePlayerCounter, setGamePlayerCounter] = useState(0);
   const [gameBotCounter, setGameBotCounter] = useState(0);
 
+  const navigate = useNavigate();
+  const goBack = () => navigate('/');
+  
   const opciones =  [
     {
       element: "rock",
@@ -159,7 +163,8 @@ const resetGame = () => {
                     <h1>{result}</h1>
                   </div> 
                   <p>Do you want to start again ?</p>
-                  <button className="button-85" role="button" onClick={() => {resetAllGame()}}>reset</button> 
+                  <button className="button-85" role="button" onClick={() => {resetAllGame()}}>reset</button><br/> 
+                    <button onClick={goBack} className="button-85"> Back</button>
                 </div>
                 <div className='jugador2'>
                   <div className='data-jugador2'>

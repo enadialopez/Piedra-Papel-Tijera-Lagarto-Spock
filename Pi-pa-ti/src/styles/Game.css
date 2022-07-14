@@ -124,6 +124,7 @@ p{
   -webkit-user-select: none;
   touch-action: manipulation;
   left: 150px;
+  margin-top: 10px;
 }
 
 .button-85:before {
